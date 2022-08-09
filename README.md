@@ -36,3 +36,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ```shell
 npm install element-plus --save
 ```
+- 安装nprogress进度条
+```shell
+npm install nprogress
+```
+- 安装axios异步请求
+```shell
+npm install axios --save
+```
