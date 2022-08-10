@@ -22,17 +22,44 @@ const routes = [
             }
         ]
     },
+    // 工作负载路由
+    {
+        path: "/workload",
+        name: "工作负载",
+        component: Layout,
+        icon: "menu",
+        meta: {
+            title: "工作负载",
+            requireAuth: true
+        },
+        children: [
+            {
+                path: "/workload/deployment",
+                name: "Deployment",
+                icon: "el-icon-s-data",
+                meta: {title: "Deployment", requireAuth: true},
+                component: () => import('@/views/deployment/Deployment')
+            },
+            {
+                path: "/workload/pod",
+                name: "Pod",
+                icon: "el-icon-document-add",
+                meta: {title: "Pod", requireAuth: true},
+                component: () => import('@/views/pod/Pod')
+            }
+        ]
+    },
     // 404路由
     {
         path: '/404',
         meta: {title: "页面不存在", requireAuth: true},
-        component: () => import('@/views/common/404.vue')
+        component: () => import('@/views/common/404')
     },
     // 403路由
     {
         path: '/403',
         meta: {title: "无权访问页面", requireAuth: true},
-        component: () => import('@/views/common/403.vue')
+        component: () => import('@/views/common/403')
     },
     // 未匹配的路由均跳转至404页面
     {
