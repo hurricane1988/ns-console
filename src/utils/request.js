@@ -1,6 +1,4 @@
 import axios from "axios";
-import {re} from "@babel/core/lib/vendor/import-meta-resolve";
-
 
 // 新建个axios对象
 const httpClient = axios.create({

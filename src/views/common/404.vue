@@ -1,0 +1,48 @@
+<template>
+  <div class="main-body-div">
+    <el-row>
+      <!-- 图片 -->
+      <el-col :span="24">
+        <img class="main-body-img" src="../../assets/img/404.png" />
+      </el-col>
+      <!--      描述-->
+      <el-col :span="24">
+        <div>
+          <p class="status-code">404</p>
+          <p class="status-describe">您所访问的页面不存在...</p>
+        </div>
+      </el-col>
+    </el-row>
+  </div>
+</template>
+
+<script>
+export default {
+}
+</script>
+
+<style scoped>
+  /*图片属性*/
+  .main-body-img {
+    margin-top: 150px;
+  }
+  /*整体位置*/
+  .main-body-div {
+    text-align: center;
+    height: 100vh;
+    width: 100vw;
+    background: #ffffff;
+  }
+  /*状态码*/
+  .status-code {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 95px;
+    font-weight: bold;
+    color: rgb(54,95,230);
+  }
+  /*描述*/
+  .status-describe {
+    color: rgb(145, 143, 143);
+  }
+</style>

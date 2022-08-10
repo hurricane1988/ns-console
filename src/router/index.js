@@ -3,15 +3,41 @@ import {createRouter, createWebHistory} from 'vue-router'
 // 导入进度条
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+// 导入layout
+import Layout from '@/layout/Layout'
 
 // 路由规则
 const routes = [
     {
-        path: '/home',
-        name: '概要',
-        icon: 'odometer',
-        meta: {title: "概要", requireAuth: true},
-        component: () => import('@/views/home/Home')
+        path: "/home",
+        component: Layout,
+        icon: "odometer",
+        children: [
+            {
+                path: '/home',
+                name: '概要',
+                icon: 'odometer',
+                meta: {title: "概要", requireAuth: true},
+                component: () => import('@/views/home/Home')
+            }
+        ]
+    },
+    // 404路由
+    {
+        path: '/404',
+        meta: {title: "页面不存在", requireAuth: true},
+        component: () => import('@/views/common/404.vue')
+    },
+    // 403路由
+    {
+        path: '/403',
+        meta: {title: "无权访问页面", requireAuth: true},
+        component: () => import('@/views/common/403.vue')
+    },
+    // 未匹配的路由均跳转至404页面
+    {
+        path: '/:pathMatch(.*)',
+        redirect: '/404'
     },
 ]
 
