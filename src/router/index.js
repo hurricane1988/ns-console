@@ -15,9 +15,9 @@ const routes = [
         children: [
             {
                 path: '/home',
-                name: '概要',
+                name: '集群概览',
                 icon: 'odometer',
-                meta: {title: "概要", requireAuth: true},
+                meta: {title: "集群概览", requireAuth: true},
                 component: () => import('@/views/home/Home')
             }
         ]
@@ -35,16 +35,16 @@ const routes = [
         children: [
             {
                 path: "/workload/deployment",
-                name: "Deployment",
+                name: "部署",
                 icon: "el-icon-s-data",
-                meta: {title: "Deployment", requireAuth: true},
+                meta: {title: "部署", requireAuth: true},
                 component: () => import('@/views/deployment/Deployment')
             },
             {
                 path: "/workload/pod",
-                name: "Pod",
+                name: "容器组",
                 icon: "el-icon-document-add",
-                meta: {title: "Pod", requireAuth: true},
+                meta: {title: "容器", requireAuth: true},
                 component: () => import('@/views/pod/Pod')
             }
         ]
