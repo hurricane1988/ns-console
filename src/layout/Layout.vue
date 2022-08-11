@@ -54,7 +54,70 @@
 					</div>
 				</el-menu>
 			</el-aside>
+			
+			<!--  -->
+			<el-container>
+				<el-header class="header">
+					<el-row :gutter="20">
+						<!-- 折叠按钮 -->
+						<el-col :span="1">
+							<div class="header-collapse" @click="onCollapse">
+								<el-icon><component :is="isCollapse?'expand':'fold'" /></el-icon>
+							</div>
+						</el-col>
+						
+						<!-- 面包屑 -->
+						<el-col :span="10">
+							<div class="header-breadcrumb">
+								<el-breadcrumb separator="/">
+									<!-- 最外层“工作台”，写死 -->
+									<el-breadcrumb-item :to="{path:'/'}">工作台</el-breadcrumb-item>
+									<!-- 循环出路由规则中的父name与子name -->
+									<template v-for="(matched, m) in this.$route.matched" :key="m">
+										<el-breadcrumb-item v-if="matched.name != undefined">
+											{{ matched.name }}
+										</el-breadcrumb-item>
+									</template>
+								</el-breadcrumb>
+								
+							</div>
+						</el-col>
+						<!-- 用户信息 -->
+						<el-col :span="13">
+							<div class="header-user">
+								<el-dropdown>
+									<div class="header-dropdown">
+										<!-- 用户头像和用户名 -->
+										<el-image class="avator-image" :src="avator" />
+										<span>{{ username }}</span>
+									</div>
+									<!-- 下拉框内容 -->
+									<template #dropdown>
+										<el-dropdown-menu>
+											<el-dropdown-item>修改密码</el-dropdown-item>
+											<el-dropdown-item @click="logout()">退出</el-dropdown-item>
+										</el-dropdown-menu>
+									</template>
+								</el-dropdown>
+							</div>
+						</el-col>
+					</el-row>
+				</el-header>
+				
+				<el-main class="main">
+					<router-view>
+					</router-view>
+				</el-main>
+				
+				<el-footer class="footer">
+					<!-- 图标 -->
+					<el-icon style="width:2em;top:3px;font-size:18px"><place/></el-icon>
+					<!-- 描述 -->
+					<a style="font-size: 18px;color: #1f2a3a">2022 Cloud Native Computing</a>
+				</el-footer>
+				<el-backtop target=".main"></el-backtop>
       </el-container>
+		</el-container>
 	</div>
 </template>
 
@@ -71,6 +134,31 @@ export default {
 			asideWidth: '220px',
 			// 路由规则
 			routers: [],
+		}
+	},
+	computed: {
+		username() {
+			let username = localStorage.getItem('username')
+			return username?username:'未知'
+		}
+	},
+	methods: {
+		onCollapse() {
+			// 当前状态是收起的，点击后执行展开的动作
+			if (this.isCollapse) {
+				this.asideWidth = '220px'
+				this.isCollapse = false
+			} else {
+				// 当前状态是展开的，点击后执行收起的动作
+				this.asideWidth = '64px'
+				this.isCollapse = true
+			}
+		},
+		logout() {
+			localStorage.removeItem("username")
+			localStorage.removeItem("token")
+			//跳转到/login目录
+			this.$router.push('/login')
 		}
 	},
 	beforeMount() {
@@ -134,5 +222,47 @@ export default {
 		background-color: #ffffff;
 		border-style: none;
 		border-radius: 10px;
+	}
+	
+	/* header的css属性 */
+	.header {
+		z-index: 1200;
+		line-height: 60px;
+		font-size: 24px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+	}
+	.header-collapse {
+		cursor: pointer;
+	}
+	/* 面包屑 */
+	.header-breadcrumb {
+		padding-top: 0.9em;
+	}
+	/* 用户信息 */
+	.avator-image {
+		top: 12px;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		margin-right: 8px;
+	}
+	.header-user {
+		text-align: right;
+	}
+	.header-dropdown {
+		line-height: 60px;
+		cursor: pointer;
+	}
+	/* main属性 */
+	.main {
+		padding: 10px;
+	}
+	/* footer属性 */
+	.footer {
+		z-index: 1200;
+		color: rgb(187, 184, 184);
+		font-size: 14px;
+		text-align: center;
+		line-height: 60px;
 	}
 </style>
