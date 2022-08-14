@@ -26,7 +26,7 @@
 <!--</style>-->
 
 <template>
-  <span>我是App.vue</span>
+<!--  <span>我是App.vue</span>-->
   <!--路由占位符-->
   <router-view></router-view>
 </template>

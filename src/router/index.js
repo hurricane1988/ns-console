@@ -18,7 +18,7 @@ const routes = [
                 name: '集群概览',
                 icon: 'odometer',
                 meta: {title: "集群概览", requireAuth: true},
-                component: () => import('@/views/home/Home')
+                component: () => import('@/views/home/Home.vue')
             }
         ]
     },
@@ -38,14 +38,14 @@ const routes = [
                 name: "部署",
                 icon: "el-icon-s-data",
                 meta: {title: "部署", requireAuth: true},
-                component: () => import('@/views/deployment/Deployment')
+                component: () => import('@/views/deployment/Deployment.vue')
             },
             {
                 path: "/workload/pod",
                 name: "容器组",
                 icon: "el-icon-document-add",
                 meta: {title: "容器", requireAuth: true},
-                component: () => import('@/views/pod/Pod')
+                component: () => import('@/views/pod/Pod.vue')
             }
         ]
     },
